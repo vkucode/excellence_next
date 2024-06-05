@@ -1,0 +1,10 @@
+/* styles/404.module.css */
+.container {
+  text-align: center;
+  padding: 50px;
+}
+
+.homeLink {
+  color: blue;
+  text-decoration: underline;
+}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { FiMenu, FiArrowRight, FiX, FiChevronDown } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
+import styles from './components.module.scss'
 import {
   useMotionValueEvent,
   AnimatePresence,
@@ -9,6 +10,7 @@ import {
   motion,
 } from "framer-motion";
 import useMeasure from "react-use-measure";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
@@ -29,12 +31,12 @@ const FlyoutNav = () => {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full px-6 text-white 
+      className={`${styles.navbar} fixed top-0 z-50 w-full px-6 text-black 
       transition-all duration-300 ease-out lg:px-12
       ${
         scrolled
-          ? "bg-neutral-950 py-3 shadow-xl"
-          : "bg-neutral-950/0 py-6 shadow-none"
+          ? "bg-white py-2 shadow-xl"
+          : "bg-white py-2 shadow-none"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
@@ -49,31 +51,12 @@ const FlyoutNav = () => {
   );
 };
 
-const Logo = ({ color = "white" }) => {
+const Logo = () => {
   // Temp logo from https://logoipsum.com/
   return (
-    <div className="flex items-center gap-2">
-      <span className="text-2xl font-bold" style={{ color }}>
-        Placeholder
-      </span>
-      <svg
-        width="50"
-        height="39"
-        viewBox="0 0 50 39"
-        fill={color}
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-10"
-      >
-        <path
-          d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-          stopColor={color}
-        ></path>
-        <path
-          d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-          stopColor={color}
-        ></path>
-      </svg>
-    </div>
+    <a href="/accueil" className="flex items-center gap-2">
+      <Image src="/logo.png" width={200} height={400} alt="logo" />
+    </a>
   );
 };
 
@@ -100,13 +83,13 @@ const NavLink = ({ children, href, FlyoutContent }) => {
       onMouseLeave={() => setOpen(false)}
       className="relative h-fit w-fit"
     >
-      <a href={href} className="relative">
+      <a href={href} className="relative font-medium">
         {children}
         <span
           style={{
             transform: showFlyout ? "scaleX(1)" : "scaleX(0)",
           }}
-          className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left scale-x-0 rounded-full bg-indigo-300 transition-transform duration-300 ease-out"
+          className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left scale-x-0 rounded-full bg-green-300 transition-transform duration-300 ease-out"
         />
       </a>
       <AnimatePresence>
@@ -132,173 +115,64 @@ const NavLink = ({ children, href, FlyoutContent }) => {
 const CTAs = () => {
   return (
     <div className="flex items-center gap-3">
-      <button className="flex items-center gap-2 rounded-lg border-2 border-white px-4 py-2 font-semibold text-white transition-colors hover:bg-white hover:text-black">
+      <button className="flex items-center gap-2 rounded-lg border-2 border-black px-4 py-2 font-semibold text-black transition-colors hover:bg-green-600 hover:text-white hover:border-green-600">
         <FaUserCircle />
-        <span>Sign in</span>
+        <span>Espace client</span>
       </button>
-      <button className="rounded-lg border-2 border-indigo-300 bg-indigo-300 px-4 py-2 font-semibold text-black transition-colors hover:border-indigo-600 hover:bg-indigo-600 hover:text-white">
-        Schedule a Demo
-      </button>
+      <a href="/contact" className="rounded-lg border-2 border-green-300 bg-green-300 px-4 py-2 font-semibold text-black transition-colors hover:border-green-600 hover:bg-green-600 hover:text-white">
+        Nous contacter
+      </a>
     </div>
   );
 };
 
-const AboutUsContent = () => {
-  return (
-    <div className="grid h-fit w-full grid-cols-12 shadow-xl lg:h-72 lg:w-[600px] lg:shadow-none xl:w-[750px]">
-      <div className="col-span-12 flex flex-col justify-between bg-neutral-950 p-6 lg:col-span-4">
-        <div>
-          <h2 className="mb-2 text-xl font-semibold text-white">About us</h2>
-          <p className="mb-6 max-w-xs text-sm text-neutral-400">
-            Placeholder is the world's leading placeholder company.
-          </p>
-        </div>
-        <a
-          href="#"
-          className="flex items-center gap-1 text-xs text-indigo-300 hover:underline"
-        >
-          Learn more <FiArrowRight />
-        </a>
-      </div>
-      <div className="col-span-12 grid grid-cols-2 grid-rows-2 gap-3 bg-white p-6 lg:col-span-8">
-        <a
-          href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
-        >
-          <h3 className="mb-1 font-semibold">Features</h3>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, quam?
-          </p>
-        </a>
-        <a
-          href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
-        >
-          <h3 className="mb-1 font-semibold">Testimonials</h3>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, quam?
-          </p>
-        </a>
-        <a
-          href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
-        >
-          <h3 className="mb-1 font-semibold">Press</h3>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, quam?
-          </p>
-        </a>
-        <a
-          href="#"
-          className="rounded border-2 border-neutral-200 bg-white p-3 transition-colors hover:bg-neutral-100"
-        >
-          <h3 className="mb-1 font-semibold">Blog</h3>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, quam?
-          </p>
-        </a>
-      </div>
-    </div>
-  );
-};
 
-const PricingContent = () => {
-  return (
-    <div className="w-full bg-white p-6 shadow-none lg:w-[250px] lg:shadow-xl">
-      <div className="grid grid-cols-2 lg:grid-cols-1">
-        <div className="mb-3 space-y-3">
-          <h3 className="font-semibold">For Individuals</h3>
-          <a href="#" className="block text-sm hover:underline">
-            Introduction
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Pay as you go
-          </a>
-        </div>
-        <div className="mb-6 space-y-3">
-          <h3 className="font-semibold">For Companies</h3>
-          <a href="#" className="block text-sm hover:underline">
-            Startups
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            SMBs
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Enterprise
-          </a>
-        </div>
-      </div>
-      <button className="w-full rounded-lg border-2 border-neutral-950 px-4 py-2 font-semibold transition-colors hover:bg-neutral-950 hover:text-white">
-        Contact sales
-      </button>
-    </div>
-  );
-};
 
 const CareersContent = () => {
   return (
     <div className="grid w-full grid-cols-12 shadow-xl lg:w-[750px]">
-      <div className="col-span-12 flex flex-col justify-between bg-indigo-600 p-6 lg:col-span-4">
+      <div className="col-span-12 flex flex-col justify-between bg-green-600 p-6 lg:col-span-4">
         <div className="mb-6">
-          <h2 className="mb-2 text-xl font-semibold text-white">Careers</h2>
-          <p className="text-sm text-indigo-100">
-            Placeholder was rated a top place to work by Placeholder.
+          <h2 className="mb-2 text-xl font-semibold text-white">Services</h2>
+          <p className="text-sm text-green-100">
+            Vous voulez faire des économies d'énergie.<br />
+            Nos travaux pour répondre à vos besoins
           </p>
         </div>
         <a
           href="#"
-          className="flex items-center gap-1 text-xs text-indigo-200 hover:underline"
+          className="flex items-center gap-1 text-xs text-green-200 hover:underline"
         >
-          Careers site <FiArrowRight />
+          Voir plus<FiArrowRight />
         </a>
       </div>
       <div className="col-span-12 grid grid-cols-2 gap-3 bg-white p-6 lg:col-span-8 lg:grid-cols-3">
         <div className="space-y-3">
-          <h3 className="font-semibold">Business</h3>
+          <h3 className="font-semibold">Services</h3>
           <a href="#" className="block text-sm hover:underline">
-            Marketing
+          Chauffage / Climatisation
           </a>
           <a href="#" className="block text-sm hover:underline">
-            Finance
+          Isolation 
+          </a>
+          
+        </div>
+        <div className="space-y-3">
+          <h3 className="font-semibold">Services</h3>
+          <a href="#" className="block text-sm hover:underline">
+            VMC
           </a>
           <a href="#" className="block text-sm hover:underline">
-            Legal
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Sales
+          Énergie solaire
           </a>
         </div>
         <div className="space-y-3">
-          <h3 className="font-semibold">Engineering</h3>
+          <h3 className="font-semibold">Renovations</h3>
           <a href="#" className="block text-sm hover:underline">
-            Full stack
+          Renovation extérieure
           </a>
           <a href="#" className="block text-sm hover:underline">
-            Dev ops
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            QA
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Data
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Machine learning
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Management
-          </a>
-        </div>
-        <div className="space-y-3">
-          <h3 className="font-semibold">More</h3>
-          <a href="#" className="block text-sm hover:underline">
-            Support
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Office
-          </a>
-          <a href="#" className="block text-sm hover:underline">
-            Other
+          Rénovation intérieure
           </a>
         </div>
       </div>
@@ -382,7 +256,7 @@ const MobileMenu = () => {
             animate={{ x: 0 }}
             exit={{ x: "100vw" }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="fixed left-0 top-0 flex h-screen w-full flex-col bg-white"
+            className="fixed left-0 top-0 flex h-dvh w-full flex-col bg-white"
           >
             <div className="flex items-center justify-between p-6">
               <Logo color="black" />
@@ -390,7 +264,7 @@ const MobileMenu = () => {
                 <FiX className="text-3xl text-neutral-950" />
               </button>
             </div>
-            <div className="h-screen overflow-y-scroll bg-neutral-100 p-6">
+            <div className="h-screen overflow-y-scroll bg-white p-6">
               {LINKS.map((l) => (
                 <MobileMenuLink
                   key={l.text}
@@ -416,22 +290,16 @@ export default Navbar;
 
 const LINKS = [
   {
-    text: "About us",
+    text: "A propos de nous",
     href: "#",
-    component: AboutUsContent,
   },
   {
-    text: "Pricing",
-    href: "#",
-    component: PricingContent,
-  },
-  {
-    text: "Careers",
+    text: "Services",
     href: "#",
     component: CareersContent,
   },
   {
-    text: "Documentation",
+    text: "Actualites",
     href: "#",
   },
 ];
